@@ -14,16 +14,16 @@ class Program
 
         if(percentage >= 90)
         {
-            Console.Write( approved +". Your grade is A");
+            Console.Write( approved + " Your grade is A");
         }
         else if(percentage >= 80)
         {
-            Console.Write("Congratulations! You passed the course.Your grade is B");
+            Console.Write(approved + " Your grade is B");
 
         }
         else if(percentage >= 70)
         {
-            Console.Write("Congratulations! You passed the course. Your grade is C");
+            Console.Write(approved + " Your grade is C");
         }
         else if(percentage >= 60)
         {
@@ -31,7 +31,7 @@ class Program
         }
         else
         {
-            Console.Write("You did not pass the course. Your grade is F");
+            Console.Write(notApproved + " Your grade is F");
         }
 
         /*
