@@ -12,4 +12,7 @@ class Program
         string lastName = Console.ReadLine();
         Console.WriteLine("Your name is " + lastName + ", " + firstName + " " + lastName +".");
     }
+    /*Remeber to leave an space beetwen the question mark and the quotations
+    when prompting user for input. 
+    */
 }
