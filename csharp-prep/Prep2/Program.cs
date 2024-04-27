@@ -7,6 +7,7 @@ class Program
         Console.Write("What is your grade percentage? ");
         string percentGrade = Console.ReadLine();
         int percentage = int.Parse(percentGrade);
+        
         string approved = "Congratulations! You passed the course.";
         string notApproved = "You did not pass the course.";
 
