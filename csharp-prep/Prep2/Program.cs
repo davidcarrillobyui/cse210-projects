@@ -7,7 +7,7 @@ class Program
         Console.Write("What is your grade percentage? ");
         string percentGrade = Console.ReadLine();
         int percentage = int.Parse(percentGrade);
-        
+
         string approved = "Congratulations! You passed the course.";
         string notApproved = "You did not pass the course.";
 
@@ -35,13 +35,5 @@ class Program
             Console.Write(notApproved + " Your grade is F");
         }
 
-        /*
-       
-        Console.WriteLine("Hello Prep2 World!");
-        Console.Write("Favorite Number? ");
-        string userInput = Console.ReadLine();
-        int number = int.Parse(userInput);
-        Console.WriteLine(number);
-        */
     }
 }
