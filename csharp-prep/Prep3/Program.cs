@@ -11,7 +11,7 @@ class Program
 
         if (userGuess < magicNumber)
         {
-            Console.Write("Higher");
+            Console.Write("Higher.");
         }
         else if (userGuess == magicNumber)
         {
@@ -19,7 +19,7 @@ class Program
         }
         else
         {
-            Console.Write("Lower");
+            Console.Write("Lower.");
         }
     }
 }
