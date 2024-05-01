@@ -6,14 +6,14 @@ class Program
     {
         Console.Write("What is the magic number? ");
         int magicNumber=int.Parse(Console.ReadLine());
-        Console.Write("Make a guess." );
+        Console.Write("Make a guess: " );
         int userGuess=int.Parse(Console.ReadLine());
 
         if (userGuess < magicNumber)
         {
             Console.Write("Higher");
         }
-        if (userGuess == magicNumber)
+        else if (userGuess == magicNumber)
         {
             Console.Write("You guessed it!");
         }
