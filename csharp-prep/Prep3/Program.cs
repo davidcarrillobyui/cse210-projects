@@ -10,8 +10,6 @@ class Program
         int userGuess= 0;
 
         while (userGuess != magicNumber)
-
-        
         {
             Console.Write("Make a guess: " );
             userGuess=int.Parse(Console.ReadLine());
