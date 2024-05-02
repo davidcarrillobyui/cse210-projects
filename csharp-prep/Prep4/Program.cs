@@ -5,6 +5,7 @@ using System.Collections.Generic;
 1.Ask the user for a series of numbers, and append each one to a list. Stop when they enter 0.
 2.Compute the sum, or total, of the numbers in the list.
 3.Compute the average of the numbers in the list.
+4.Find the maximum, or largest, number in the list.
 */
 
 class Program
@@ -49,6 +50,19 @@ class Program
         float average = ((float)sum / numbers.Count);
         // Output the average to the console
         Console.WriteLine($"The average is: {average}");
+
+        int max = numbers[0]; // Initialize with the first element of the list
+
+        foreach(int number in numbers)
+        {
+            if(number > max)
+            {
+                // If this number is greater than the max, update max
+                max=number;
+            }
+        }
+
+        Console.WriteLine($"The max is: {max}");
         
     }
 }
