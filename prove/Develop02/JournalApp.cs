@@ -15,7 +15,7 @@ public class JournalApp
         
         while (isRunning)
         {
-            // Step 3: Display the menu options
+            // 3: Display the menu options
             Console.WriteLine("Journal App Menu:");
             Console.WriteLine("1. Write a new entry");
             Console.WriteLine("2. Display the journal");
@@ -24,27 +24,27 @@ public class JournalApp
             Console.WriteLine("5. Exit");
             Console.Write("Enter your choice: ");
             
-            string choice = Console.ReadLine(); // Step 4: Read user input
+            string choice = Console.ReadLine(); //   4: Read user input
             
             switch (choice)
             {
                 case "1":
-                    _journal.WriteNewEntry(); // Step 5: Call the WriteNewEntry method of the Journal instance
+                    _journal.WriteNewEntry(); //  5: Call the WriteNewEntry method of the Journal instance
                     break;
                 case "2":
-                    _journal.Display(); // Step 6: Call the Display method of the Journal instance
+                    _journal.Display(); //   6: Call the Display method of the Journal instance
                     break;
                 case "3":
-                    _journal.SaveToFile(); // Step 7: Call the SaveToFile method of the Journal instance
+                    _journal.SaveToFile(); //   7: Call the SaveToFile method of the Journal instance
                     break;
                 case "4":
-                    _journal.LoadFromFile(); // Step 8: Call the LoadFromFile method of the Journal instance
+                    _journal.LoadFromFile(); //   8: Call the LoadFromFile method of the Journal instance
                     break;
                 case "5":
-                    isRunning = false; // Step 9: Set isRunning to false to exit the loop
+                    isRunning = false; //   9: Set isRunning to false to exit the loop
                     break;
                 default:
-                    Console.WriteLine("Invalid choice. Please try again."); // Step 10: Handle invalid input
+                    Console.WriteLine("Invalid choice. Please try again."); //   10: Handle invalid input
                     break;
             }
         }
