@@ -2,11 +2,11 @@ using System;
 
 public class JournalApp
 {
-    private Journal _journal; // Step 1: Declare a private member variable of type Journal
+    private Journal _journal; // 1: Declare a private member variable of type Journal
 
     public JournalApp()
     {
-        _journal = new Journal(); // Step 2: Initialize the _journal variable with a new instance of the Journal class
+        _journal = new Journal(); // 2: Initialize the _journal variable with a new instance of the Journal class
     }
 
     public void Run()
