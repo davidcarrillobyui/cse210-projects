@@ -4,18 +4,18 @@ using System.IO;
 
 public class Journal
 {
-    private List<string> _prompts; // Step 1: Declare a private member variable to store prompts
-    private List<string> _entries; // Step 2: Declare a private member variable to store journal entries
+    private List<string> _prompts; // Declare a private member variable to store prompts
+    private List<Entry> _entries; // Declare a private member variable to store journal entries
 
     public Journal()
     {
-        InitializePrompts(); // Step 3: Call the InitializePrompts method to initialize prompts
-        _entries = new List<string>(); // Step 4: Initialize _entries with an empty list
+        InitializePrompts(); // Call the InitializePrompts method to initialize prompts
+        _entries = new List<Entry>(); // Initialize _entries with an empty list
     }
 
     private void InitializePrompts()
     {
-        // Step 5: Initialize _prompts with some default prompts
+        // Initialize _prompts with some default prompts
         _prompts = new List<string>
         {
             "Who was the most interesting person I interacted with today?",
@@ -28,26 +28,26 @@ public class Journal
 
     public void WriteNewEntry()
     {
-        // Step 6: Display a random prompt to the user
+        // Display a random prompt to the user
         Random rand = new Random();
         int index = rand.Next(_prompts.Count);
         string prompt = _prompts[index];
         Console.WriteLine("Prompt: " + prompt);
         
-        // Step 7: Read user's response
+        // Read user's response
         Console.Write("Your response: ");
         string response = Console.ReadLine();
         
-        // Step 8: Save the entry (prompt, response, and date) to _entries
-        string entry = $"{DateTime.Now:yyyy-MM-dd}: {prompt}\n{response}\n";
+        // Save the entry (prompt, response, and date) to _entries
+        Entry entry = new Entry(DateTime.Now.ToString("yyyy-MM-dd"), prompt, response);
         _entries.Add(entry);
     }
 
     public void Display()
     {
-        // Step 9: Display all journal entries
+        // Display all journal entries
         Console.WriteLine("Journal Entries:");
-        foreach (string entry in _entries)
+        foreach (Entry entry in _entries)
         {
             Console.WriteLine(entry);
         }
@@ -55,21 +55,34 @@ public class Journal
 
     public void SaveToFile()
     {
-        // Step 10: Prompt user for filename and save journal entries to the file
+        // Prompt user for filename and save journal entries to the file
         Console.Write("Enter filename to save: ");
         string filename = Console.ReadLine();
-        File.WriteAllLines(filename, _entries);
+        List<string> lines = new List<string>();
+        foreach (Entry entry in _entries)
+        {
+            lines.Add(entry.ToString());
+        }
+        File.WriteAllLines(filename, lines);
         Console.WriteLine("Journal saved to file successfully.");
     }
 
     public void LoadFromFile()
     {
-        // Step 11: Prompt user for filename and load journal entries from the file
+        // Prompt user for filename and load journal entries from the file
         Console.Write("Enter filename to load: ");
         string filename = Console.ReadLine();
         if (File.Exists(filename))
         {
-            _entries = new List<string>(File.ReadAllLines(filename));
+            _entries = new List<Entry>();
+            string[] lines = File.ReadAllLines(filename);
+            for (int i = 0; i < lines.Length; i += 3)
+            {
+                string date = lines[i].Split(':')[0];
+                string prompt = lines[i].Split(':')[1].Trim();
+                string response = lines[i + 1];
+                _entries.Add(new Entry(date, prompt, response));
+            }
             Console.WriteLine("Journal loaded from file successfully.");
         }
         else
