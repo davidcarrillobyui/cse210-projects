@@ -29,11 +29,27 @@ public class Fraction
         denominator = bottom;
     }
 
-    //a method to display the fraction:
+    /*a method to display the fraction:
     public void DisplayFraction()
     {
         Console.WriteLine($"{numerator}/{denominator}");
     }
+    */
+
+    public string GetFraction()
+    {
+        string text = $"{numerator}/{denominator}";
+        return text;
+    }
+
+    public double GetDecimal()
+    {
+        return (double)numerator/denominator;
+    }
+
+
+
+
 
 
 
