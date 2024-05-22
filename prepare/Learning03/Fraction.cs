@@ -2,45 +2,38 @@ using System;
 
 public class Fraction
 {
-    /*Step 3: 
-    Create a class to hold fraction.
-    The class should be in its own file.
-    The class should have two attributes for the top and bottom numbers.
-    Make sure the attributes are private.
-    */
+    // Step 3: Declare private attributes for the numerator and denominator
     private int numerator;
     private int denominator;
 
-    //Step 4: Create the Constructors
+    // Step 4: Create the constructors
 
+    // Constructor that initializes the fraction to 1/1
     public Fraction()
     {
-        numerator= 1;
-        denominator=1;
+        numerator = 1;
+        denominator = 1;
     }
 
-    public Fraction(int aNumber)
+    // Constructor that initializes the fraction to anyNumber/1
+    public Fraction(int anyNumber)
     {
-        numerator=aNumber;
-        denominator= 1;
-
+        numerator = anyNumber;
+        denominator = 1;
     }
 
+    // Constructor that initializes the fraction to top/bottom
     public Fraction(int top, int bottom)
     {
-        numerator=top;
-        denominator=bottom;
-
+        numerator = top;
+        denominator = bottom;
     }
 
-
-
-
-
-
-
-
-
+    //a method to display the fraction:
+    public void DisplayFraction()
+    {
+        Console.WriteLine($"{numerator}/{denominator}");
+    }
 
 
 
