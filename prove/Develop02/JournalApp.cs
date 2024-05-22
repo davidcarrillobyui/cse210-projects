@@ -2,11 +2,11 @@ using System;
 
 public class JournalApp
 {
-    private Journal _journal; // 1: Declare a private member variable of type Journal
+    private Journal _journal; // Declare a private member variable of type Journal
 
     public JournalApp()
     {
-        _journal = new Journal(); // 2: Initialize the _journal variable with a new instance of the Journal class
+        _journal = new Journal(); // Initialize the _journal variable with a new instance of the Journal class
     }
 
     public void Run()
@@ -15,7 +15,7 @@ public class JournalApp
         
         while (isRunning)
         {
-            // 3: Display the menu options
+            // Display the menu options
             Console.WriteLine("Journal App Menu:");
             Console.WriteLine("1. Write a new entry");
             Console.WriteLine("2. Display the journal");
@@ -24,27 +24,27 @@ public class JournalApp
             Console.WriteLine("5. Exit");
             Console.Write("Enter your choice: ");
             
-            string choice = Console.ReadLine(); //   4: Read user input
+            string choice = Console.ReadLine(); // Read user input
             
             switch (choice)
             {
                 case "1":
-                    _journal.WriteNewEntry(); //  5: Call the WriteNewEntry method of the Journal instance
+                    _journal.WriteNewEntry(); // Call the WriteNewEntry method of the Journal instance
                     break;
                 case "2":
-                    _journal.Display(); //   6: Call the Display method of the Journal instance
+                    _journal.Display(); // Call the Display method of the Journal instance
                     break;
                 case "3":
-                    _journal.SaveToFile(); //   7: Call the SaveToFile method of the Journal instance
+                    _journal.SaveToFile(); // Call the SaveToFile method of the Journal instance
                     break;
                 case "4":
-                    _journal.LoadFromFile(); //   8: Call the LoadFromFile method of the Journal instance
+                    _journal.LoadFromFile(); // Call the LoadFromFile method of the Journal instance
                     break;
                 case "5":
-                    isRunning = false; //   9: Set isRunning to false to exit the loop
+                    isRunning = false; // Set isRunning to false to exit the loop
                     break;
                 default:
-                    Console.WriteLine("Invalid choice. Please try again."); //   10: Handle invalid input
+                    Console.WriteLine("Invalid choice. Please try again."); // Handle invalid input
                     break;
             }
         }
