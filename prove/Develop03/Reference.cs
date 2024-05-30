@@ -1,38 +1,38 @@
 public class Reference
 {
-    private string book; // Name of the book
-    private int chapter; // Chapter number
-    private int startVerse; // Starting verse number
-    private int? endVerse; // Ending verse number (nullable for single verse references)
+    private string _book; // Name of the book
+    private int _chapter; // Chapter number
+    private int _startVerse; // Starting verse number
+    private int? _endVerse; // Ending verse number (nullable for single verse references)
 
     // Constructor for a single verse
     public Reference(string book, int chapter, int verse)
     {
-        this.book = book;
-        this.chapter = chapter;
-        this.startVerse = verse;
-        this.endVerse = null;
+        _book = book;
+        _chapter = chapter;
+        _startVerse = verse;
+        _endVerse = null;
     }
 
     // Constructor for a verse range
     public Reference(string book, int chapter, int startVerse, int endVerse)
     {
-        this.book = book;
-        this.chapter = chapter;
-        this.startVerse = startVerse;
-        this.endVerse = endVerse;
+        _book = book;
+        _chapter = chapter;
+        _startVerse = startVerse;
+        _endVerse = endVerse;
     }
 
     // Method to get the formatted reference as a string
     public string GetFormattedReference()
     {
-        if (endVerse.HasValue)
+        if (_endVerse.HasValue)
         {
-            return $"{book} {chapter}:{startVerse}-{endVerse}";
+            return $"{_book} {_chapter}:{_startVerse}-{_endVerse}";
         }
         else
         {
-            return $"{book} {chapter}:{startVerse}";
+            return $"{_book} {_chapter}:{_startVerse}";
         }
     }
 }
