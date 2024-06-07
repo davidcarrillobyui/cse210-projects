@@ -1,13 +1,13 @@
 using System;
 
-public class Assigment
+public class Assignment
 {
     private string _studentName;
 
     private string _topic;
 
 
-    public Assigment(string studentName, string topic)
+    public Assignment(string studentName, string topic)
     {
         _studentName = studentName;
         _topic = topic;
