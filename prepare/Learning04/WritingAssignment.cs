@@ -1,17 +1,15 @@
-public class WritingAssignment : Assigment
-
+public class WritingAssignment : Assignment
 {
     private string _title;
-    public WritingAssignment(string studentName, string topic, string title) : base (studentName, topic)
+
+    public WritingAssignment(string studentName, string topic, string title)
+        : base(studentName, topic)
     {
         _title = title;
-
     }
 
-    public string GetWrittingInfo()
+    public string GetWritingInformation()
     {
-        return $"{_title} by {_studentName}";
+        return $"{_title} by {GetStudentName()}";
     }
-
-
 }

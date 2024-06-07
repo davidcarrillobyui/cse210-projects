@@ -1,17 +1,12 @@
-using System;
-
 public class Assignment
 {
     private string _studentName;
-
     private string _topic;
-
 
     public Assignment(string studentName, string topic)
     {
         _studentName = studentName;
         _topic = topic;
-
     }
 
     public string GetSummary()
@@ -19,4 +14,9 @@ public class Assignment
         return $"{_studentName} - {_topic}";
     }
 
+    // Providing a protected method to access student name for derived classes
+    protected string GetStudentName()
+    {
+        return _studentName;
+    }
 }
