@@ -6,9 +6,17 @@ public class Assigment
 
     private string _topic;
 
-    GetSummary(string)
-    {
 
+    public Assigment(string studentName, string topic)
+    {
+        _studentName = studentName;
+        _topic = topic;
+
+    }
+
+    public string GetSummary()
+    {
+        return $"{_studentName} - {_topic}";
     }
 
 }
