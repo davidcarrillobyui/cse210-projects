@@ -4,6 +4,11 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop04 World!");
+       while(true)
+       {
+        Console.WriteLine("Mindfulness Program");
+        Console.WriteLine("1.Breathing Activity");
+        
+       }
     }
 }

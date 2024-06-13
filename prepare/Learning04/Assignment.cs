@@ -15,7 +15,7 @@ public class Assignment
     }
 
     // Providing a protected method to access student name for derived classes
-    protected string GetStudentName()
+    public string GetStudentName()
     {
         return _studentName;
     }
