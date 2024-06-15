@@ -1,39 +1,53 @@
 using System;
 
+// Base class representing a generic activity
 public abstract class Activity
 {
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public int Duration { get; set; }
+    // Private member variables
+    private string _name;
+    private string _description;
+    private int _duration;
 
+    // Constructor to initialize the activity name and description
     protected Activity(string name, string description)
     {
-        Name = name;
-        Description = description;
+        _name = name;
+        _description = description;
     }
 
-    public void Start()
+    // Public property to get and set the duration of the activity
+    public int Duration
     {
-        Console.WriteLine($"Starting {Name}: {Description}");
+        get { return _duration; }
+        set { _duration = value; }
+    }
+
+    // Method to start the activity
+    protected void Start()
+    {
+        Console.WriteLine($"Starting {_name}: {_description}");
         Console.WriteLine("Prepare to begin...");
-        Pause(3);
+        Pause(3); // Pause for 3 seconds
     }
 
-    public void End()
+    // Method to end the activity
+    protected void End()
     {
-        Console.WriteLine($"Good job! You have completed {Name} for {Duration} seconds.");
-        Pause(3);
+        Console.WriteLine($"Good job! You have completed {_name} for {_duration} seconds.");
+        Pause(3); // Pause for 3 seconds
     }
 
-    public void Pause(int seconds)
+    // Method to pause the execution for a given number of seconds
+    protected void Pause(int seconds)
     {
         for (int i = 0; i < seconds; i++)
         {
-            Console.Write(".");
-            System.Threading.Thread.Sleep(1000);
+            Console.Write("."); // Display a dot each second
+            System.Threading.Thread.Sleep(1000); // Wait for 1 second
         }
         Console.WriteLine();
     }
 
+    // Abstract method to be implemented by derived classes to run the specific activity
     public abstract void Run();
 }

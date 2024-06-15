@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 
+// Derived class representing the reflection activity
 public class ReflectionActivity : Activity
 {
-    private List<string> Prompts { get; } = new List<string>
+    // Private member variables to hold prompts and questions
+    private List<string> _prompts = new List<string>
     {
         "Think of a time when you stood up for someone else",
         "Think of a time when you did something really difficult",
@@ -11,7 +13,7 @@ public class ReflectionActivity : Activity
         "Think of a time when you did something truly selfless"
     };
 
-    private List<string> Questions { get; } = new List<string>
+    private List<string> _questions = new List<string>
     {
         "Why was this experience meaningful to you?",
         "Have you ever done anything like this before?",
@@ -24,25 +26,28 @@ public class ReflectionActivity : Activity
         "How can you keep this experience in mind in the future?"
     };
 
+    // Constructor that calls the base class constructor with name and description
     public ReflectionActivity() : base("Reflection", "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.")
     {
     }
 
+    // Override the Run method to implement the reflection activity
     public override void Run()
     {
-        Start();
+        Start(); // Call the Start method from the base class
         Random random = new Random();
-        string prompt = Prompts[random.Next(Prompts.Count)];
+        string prompt = _prompts[random.Next(_prompts.Count)];
         Console.WriteLine(prompt);
-        Pause(3);
+        Pause(3); // Pause for 3 seconds
 
         DateTime endTime = DateTime.Now.AddSeconds(Duration);
+        // Loop until the duration is over
         while (DateTime.Now < endTime)
         {
-            string question = Questions[random.Next(Questions.Count)];
+            string question = _questions[random.Next(_questions.Count)];
             Console.WriteLine(question);
-            Pause(5);
+            Pause(5); // Pause for 5 seconds
         }
-        End();
+        End(); // Call the End method from the base class
     }
 }
