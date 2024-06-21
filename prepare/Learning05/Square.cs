@@ -1,3 +1,4 @@
+
 public class Square : Shape
 {
     private double _side;
@@ -12,4 +13,4 @@ public class Square : Shape
     {
         return _side * _side;
     }
-} //class
+}

@@ -1,3 +1,4 @@
+
 public abstract class Shape
 {
     private string _color;
@@ -19,4 +20,4 @@ public abstract class Shape
 
     // Abstract method that must be implemented by derived classes
     public abstract double GetArea();
-} //class
+}

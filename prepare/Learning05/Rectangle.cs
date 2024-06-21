@@ -1,3 +1,4 @@
+
 public class Rectangle : Shape
 {
     private double _length;
@@ -14,4 +15,4 @@ public class Rectangle : Shape
     {
         return _length * _width;
     }
-} //class
+}
