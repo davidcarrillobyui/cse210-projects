@@ -1,21 +1,17 @@
 public class Rectangle : Shape
 {
+    private double _length;
     private double _width;
-    private double _height;
 
-    public Rectangle(string color, double width, double height): base(color)
+    public Rectangle(string color, double length, double width) : base(color)
     {
-        _width = width:
-        _height = height;
+        _length = length;
+        _width = width;
     }
 
+    // Override the GetArea method to calculate the area of a rectangle
     public override double GetArea()
     {
-        return _width*_height;
+        return _length * _width;
     }
-
-
-
-
-
-}// class
+} //class
