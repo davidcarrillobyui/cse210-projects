@@ -1,4 +1,6 @@
 using System;
+
+
 class SimpleGoal : Goal
 {
     private string _goalType = "Simple";
