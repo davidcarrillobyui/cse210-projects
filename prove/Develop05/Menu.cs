@@ -1,5 +1,5 @@
 using System;
-
+using System.Collections.Generic;
 
 public class Menu
 {
@@ -36,7 +36,6 @@ public class Menu
         }
 
         Console.Write("Select a choice: ");
-       
     }
 
     public void DisplayNewGoalMenu()
@@ -47,5 +46,4 @@ public class Menu
         }
         Console.Write("Select a choice from the menu: ");
     }
-
 }

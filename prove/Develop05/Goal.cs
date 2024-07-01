@@ -1,11 +1,12 @@
 using System;
-public class Goal
+
+public abstract class Goal
 {
     private string _goalName;
     private string _goalDescription;
 
-    public Goal()
-    {}
+    public Goal() { }
+
     public Goal(string goalName, string goalDescription)
     {
         _goalName = goalName;
@@ -16,23 +17,24 @@ public class Goal
     {
         return _goalName;
     }
+
     public void SetGoalName(string goalName)
     {
         _goalName = goalName;
     }
+
     public string GetGoalDescription()
     {
         return _goalDescription;
     }
+
     public void SetGoalDescription(string goalDescription)
     {
         _goalDescription = goalDescription;
     }
 
-       public virtual void DisplayGoalPoints()
-    {
-        return;
-    }
+    public virtual void DisplayGoalPoints() { }
+
     public virtual int GetGoalPoints()
     {
         return 0;
@@ -47,9 +49,8 @@ public class Goal
     {
         return "";
     }
-    public virtual void RecordEvent()
-    {
-    }
+
+    public virtual void RecordEvent() { }
 
     public string DisplayGoalName()
     {
@@ -64,6 +65,4 @@ public class Goal
         _goalDescription = Console.ReadLine();
         return _goalDescription;
     }
-
- 
 }

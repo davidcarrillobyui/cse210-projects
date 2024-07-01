@@ -1,16 +1,15 @@
 using System;
 
-
 class SimpleGoal : Goal
 {
     private string _goalType = "Simple";
     private bool _goalComplete;
     private int _goalPoints;
 
-    public SimpleGoal()
-    {
-    }
-    public SimpleGoal(string goalName, string goalDescription, int goalPoints, bool goalComplete) : base (goalName, goalDescription)
+    public SimpleGoal() { }
+
+    public SimpleGoal(string goalName, string goalDescription, int goalPoints, bool goalComplete)
+        : base(goalName, goalDescription)
     {
         _goalComplete = goalComplete;
         _goalPoints = goalPoints;
@@ -20,13 +19,13 @@ class SimpleGoal : Goal
     {
         Console.Write("How many points is this goal worth? ");
         _goalPoints = int.Parse(Console.ReadLine());
-        return;
     }
+
     public override int GetGoalPoints()
     {
         return _goalPoints;
     }
-    
+
     public override bool GetGoalStatus()
     {
         return _goalComplete;
