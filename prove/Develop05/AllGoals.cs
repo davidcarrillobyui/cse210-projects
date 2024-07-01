@@ -1,64 +1,13 @@
 using System;
-using System.Collections.Generic;
-
-public class AllGoals
+class AllGoals
 {
-    private List<Goal> _goals;
+    private List<Goal> _allGoals = new List<Goal>();
     private int _totalPoints;
+    private string _fileName;
 
-    public AllGoals()
+    public void addGoal(Goal _goal)
     {
-        _goals = new List<Goal>();
-        _totalPoints = 0;
-    }
-
-    public List<Goal> GetGoals()
-    {
-        return _goals;
-    }
-
-    public void SetGoals(List<Goal> goals)
-    {
-        _goals = goals;
-    }
-
-    public void addGoal(Goal goal)
-    {
-        _goals.Add(goal);
-    }
-
-    public void DisplayGoals()
-    {
-        Console.WriteLine("The goals are:");
-        int goalIndex = 1;
-        foreach (Goal goal in _goals)
-        {
-            Console.WriteLine($"{goalIndex}. {goal.ToString()}");
-            goalIndex++;
-        }
-    }
-
-    public void DisplayPoints(int points)
-    {
-        Console.WriteLine($"You have {points} points.");
-    }
-
-    public void DisplayGoalRecordEvent()
-    {
-        DisplayGoals();
-        Console.Write("Which goal did you accomplish? ");
-        int userInput = int.Parse(Console.ReadLine()) - 1;
-
-        if (userInput < _goals.Count)
-        {
-            Goal accomplishedGoal = _goals[userInput];
-            accomplishedGoal.RecordEvent();
-            _totalPoints += accomplishedGoal.GetGoalPoints();
-        }
-        else
-        {
-            Console.WriteLine("Invalid selection. Please try again.");
-        }
+        _allGoals.Add(_goal);
     }
 
     public int getTotalPoints()
@@ -66,45 +15,107 @@ public class AllGoals
         return _totalPoints;
     }
 
+    public void DisplayPoints(int totalPoints)
+    {
+        
+        Console.WriteLine($"Total Points: {totalPoints}");
+    }
+
+    public void DisplayGoals()
+    {
+        if (_allGoals.Count() == 0)
+        {
+            Console.WriteLine("No goals have been created or loaded.");
+            return;
+        }
+        Console.WriteLine("Your goals:");
+        foreach (Goal goal in _allGoals)
+        {
+            Console.WriteLine($"{_allGoals.IndexOf(goal) + 1}. {goal.ToString()}");
+        }
+        Console.WriteLine();
+    }
+
     public void SaveGoals()
     {
-        List<string> goalRecords = new List<string>();
-        foreach (Goal goal in _goals)
+        if (_allGoals.Count() == 0)
         {
-            goalRecords.Add(goal.ToCSVRecord());
+            Console.WriteLine("There are no goals to save.");
+            Console.WriteLine();
+            return;
         }
-
-        SaveLoadCSV.SaveToCSV(goalRecords, "goals.csv");
-        Console.WriteLine("Goals saved successfully.");
+    
+        Console.WriteLine("Please enter the filename you want to save: ");
+        _fileName = Console.ReadLine();
+        string fileToSave = _fileName;
+        List<string> saveGoals = new List<string>();
+        //save points first
+        saveGoals.Add(_totalPoints.ToString());
+        foreach (Goal goal in _allGoals)
+        {
+            saveGoals.Add(goal.ToCSVRecord());
+        }
+        SaveLoadCSV.SaveToCSV(saveGoals, fileToSave);
+        Console.WriteLine("Goals saved.");
     }
 
     public void LoadGoals()
     {
-        List<string> loadedRecords = SaveLoadCSV.LoadFromCSV("goals.csv");
-        foreach (string record in loadedRecords)
-        {
-            string[] recordParts = record.Split('|');
-            Goal goal = null;
+        List<string> fileGoals;
+        Console.WriteLine("Please enter the filename you want to load: ");
+        _fileName = Console.ReadLine();
+        fileGoals = SaveLoadCSV.LoadFromCSV(_fileName);
+        _totalPoints = int.Parse(fileGoals[0]) + _totalPoints;
 
-            switch (recordParts[0])
+        Goal goal = null;
+        foreach (string fileGoal in fileGoals)
+        {
+            
+            string[] goalParts = fileGoal.Split('|');
+            string goalType = goalParts[0];
+            if (goalType == "Simple")
             {
-                case "Simple":
-                    goal = new SimpleGoal(recordParts[1], recordParts[2], int.Parse(recordParts[3]), bool.Parse(recordParts[4]));
-                    break;
-                case "Eternal":
-                    goal = new EternalGoal(recordParts[1], recordParts[2], int.Parse(recordParts[3]), int.Parse(recordParts[4]), bool.Parse(recordParts[5]));
-                    break;
-                case "CheckList":
-                    goal = new CheckListGoal(recordParts[1], recordParts[2], int.Parse(recordParts[3]), int.Parse(recordParts[4]), int.Parse(recordParts[5]), int.Parse(recordParts[6]), bool.Parse(recordParts[7]));
-                    break;
+                goal = new SimpleGoal(goalParts[1], goalParts[2], int.Parse(goalParts[3]), bool.Parse(goalParts[4]));
+            }
+            else if (goalType == "Eternal")
+            {
+                goal = new EternalGoal(goalParts[1], goalParts[2], int.Parse(goalParts[3]), int.Parse(goalParts[4]), bool.Parse(goalParts[5]));
+            }
+            else if (goalType == "CheckList")
+            {
+                goal = new CheckListGoal(goalParts[1], goalParts[2], int.Parse(goalParts[3]), int.Parse(goalParts[4]), int.Parse(goalParts[5]), int.Parse(goalParts[6]), bool.Parse(goalParts[7]));
             }
 
-            if (goal != null)
+            if (goal != null && _allGoals.Contains(goal) == false)
             {
-                _goals.Add(goal);
+                _allGoals.Add(goal);
             }
         }
+        Console.WriteLine("Goals loaded.");
+    }
 
-        Console.WriteLine("Goals loaded successfully.");
+    public void DisplayGoalRecordEvent()
+    {
+        Console.WriteLine("The Goals are:");
+        foreach (Goal goal in _allGoals)
+        {
+            Console.WriteLine(string.Format($"{_allGoals.IndexOf(goal) + 1}. [{((goal.GetGoalStatus() == false) ? " " : "x")}] {goal.GetGoalName()}"));
+        }
+        Console.Write("Which goal did you complete? ");
+        int recordEvent = int.Parse(Console.ReadLine()) - 1;
+        Console.Clear();
+        bool status = _allGoals[recordEvent].GetGoalStatus();
+        if (status == false)
+        {
+            _allGoals[recordEvent].RecordEvent();
+            _totalPoints += _allGoals[recordEvent].GetGoalPoints();
+            Console.WriteLine(string.Format($"You now have {_totalPoints.ToString()} points!"));
+            Console.WriteLine();
+        }
+        else
+        {
+            Console.WriteLine("You have already completed that goal!");
+            Console.WriteLine();
+        }
     }
 }
