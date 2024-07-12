@@ -1,20 +1,21 @@
-using System;
-
 public class User
 {
-    public int UserID { get; set; }
-    public string UserName { get; set; }
+    // Properties for User
+    public int UserId { get; set; }
+    public string Name { get; set; }
     public string Email { get; set; }
 
-    public User(int userID, string userName, string email)
+    // Constructor to initialize User properties
+    public User(int userId, string name, string email)
     {
-        UserID = userID;
-        UserName = userName;
+        UserId = userId;
+        Name = name;
         Email = email;
     }
 
+    // Method to get user details
     public string GetUserDetails()
     {
-        return $"User: {UserName}, Email: {Email}";
+        return $"User ID: {UserId}, Name: {Name}, Email: {Email}";
     }
 }

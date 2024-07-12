@@ -3,59 +3,41 @@ using System.Collections.Generic;
 
 public class PersonalFinanceManager
 {
+    // List to store all transactions
     private List<Transaction> transactions = new List<Transaction>();
+    
+    // List to store all savings goals
     private List<SavingsGoal> savingsGoals = new List<SavingsGoal>();
+    
+    // List to store all users
     private List<User> users = new List<User>();
-    private List<Report> reports = new List<Report>();
 
+    // Method to add a transaction (income or expense)
     public void AddTransaction(Transaction transaction)
     {
         transactions.Add(transaction);
     }
 
-    public void RemoveTransaction(Transaction transaction)
-    {
-        transactions.Remove(transaction);
-    }
-
-    public decimal CalculateTithing(decimal income)
-    {
-        return income * 0.10m;
-    }
-
+    // Method to add a savings goal
     public void AddSavingsGoal(SavingsGoal goal)
     {
         savingsGoals.Add(goal);
     }
 
-    public void RemoveSavingsGoal(SavingsGoal goal)
+    // Method to generate a financial report (placeholder)
+    public Report GenerateReport()
     {
-        savingsGoals.Remove(goal);
+        // Placeholder for report generation logic
+        return new Report("Sample Report Content");
     }
 
+    // Method to add a user
     public void AddUser(User user)
     {
         users.Add(user);
     }
 
-    public Report GenerateReport()
-    {
-        string content = Report.GenerateReport(transactions, savingsGoals);
-        Report report = new Report("Financial Report", content);
-        reports.Add(report);
-        return report;
-    }
-
-    public List<Transaction> GetTransactions()
-    {
-        return transactions;
-    }
-
-    public List<SavingsGoal> GetSavingsGoals()
-    {
-        return savingsGoals;
-    }
-
+    // Method to get the list of users
     public List<User> GetUsers()
     {
         return users;

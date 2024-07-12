@@ -1,21 +1,18 @@
-using System;
-
 public class Tithing
 {
-    public decimal TithingAmount { get; set; }
+    // Property for IncomeAmount
+    public decimal IncomeAmount { get; set; }
 
-    public Tithing(decimal income)
+    // Constructor to initialize IncomeAmount
+    public Tithing(decimal incomeAmount)
     {
-        TithingAmount = CalculateTithing(income);
+        IncomeAmount = incomeAmount;
     }
 
-    private decimal CalculateTithing(decimal income)
-    {
-        return income * 0.10m;
-    }
-
+    // Method to calculate and get tithing details
     public string GetTithingDetails()
     {
-        return $"Tithing Amount: {TithingAmount:C}";
+        decimal tithingAmount = IncomeAmount * 0.10m;
+        return $"Tithing: 10% of {IncomeAmount} is {tithingAmount}";
     }
 }

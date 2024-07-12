@@ -1,25 +1,21 @@
-using System;
-
 public class SavingsGoal
 {
+    // Properties for SavingsGoal
     public string GoalName { get; set; }
     public decimal GoalAmount { get; set; }
-    public decimal Progress { get; set; }
+    public decimal AmountSaved { get; set; }
 
+    // Constructor to initialize SavingsGoal properties
     public SavingsGoal(string goalName, decimal goalAmount)
     {
         GoalName = goalName;
         GoalAmount = goalAmount;
-        Progress = 0;
+        AmountSaved = 0;
     }
 
-    public void AddProgress(decimal amount)
+    // Method to get details of the savings goal
+    public string GetSavingsGoalDetails()
     {
-        Progress += amount;
-    }
-
-    public string GetGoalDetails()
-    {
-        return $"Savings Goal: {GoalName}, Target: {GoalAmount:C}, Progress: {Progress:C}";
+        return $"Goal: {GoalName}, Amount: {GoalAmount}, Saved: {AmountSaved}";
     }
 }
