@@ -8,9 +8,6 @@ public class Program
 
     public static void Main(string[] args)
     {
-        // Initialize sample data for testing purposes
-        InitializeSampleData();
-
         // Main menu loop
         bool running = true;
         while (running)
@@ -26,15 +23,24 @@ public class Program
                     AddSavingsGoalMenu();
                     break;
                 case "3":
-                    DisplayTithingDetails();
+                    AddMonthlyBudgetMenu();
                     break;
                 case "4":
-                    GenerateAndDisplayReport();
+                    DisplayTithingDetails();
                     break;
                 case "5":
-                    DisplayUserDetails();
+                    GenerateAndDisplayReport();
                     break;
                 case "6":
+                    DisplayUserDetails();
+                    break;
+                case "7":
+                    SaveData();
+                    break;
+                case "8":
+                    LoadData();
+                    break;
+                case "9":
                     running = false;
                     break;
                 default:
@@ -50,10 +56,13 @@ public class Program
         Console.WriteLine("\n--- Personal Finance Manager ---");
         Console.WriteLine("1. Add Transaction");
         Console.WriteLine("2. Add Savings Goal");
-        Console.WriteLine("3. Display Tithing Details");
-        Console.WriteLine("4. Generate Financial Report");
-        Console.WriteLine("5. Display User Details");
-        Console.WriteLine("6. Exit");
+        Console.WriteLine("3. Add Monthly Budget");
+        Console.WriteLine("4. Display Tithing Details");
+        Console.WriteLine("5. Generate Financial Report");
+        Console.WriteLine("6. Display User Details");
+        Console.WriteLine("7. Save Data");
+        Console.WriteLine("8. Load Data");
+        Console.WriteLine("9. Exit");
         Console.Write("Enter your choice: ");
     }
 
@@ -64,8 +73,7 @@ public class Program
         Console.Write("Enter transaction type (income/expense): ");
         string type = Console.ReadLine();
 
-        Console.Write("Enter date (yyyy-mm-dd): ");
-        DateTime date = DateTime.Parse(Console.ReadLine());
+        DateTime date = ReadDateInput("Enter date (yyyy-mm-dd): ");
 
         Console.Write("Enter amount: ");
         decimal amount = decimal.Parse(Console.ReadLine());
@@ -110,6 +118,20 @@ public class Program
         manager.AddSavingsGoal(goal);
     }
 
+    // Submenu to add a new monthly budget
+    private static void AddMonthlyBudgetMenu()
+    {
+        Console.WriteLine("\n--- Add Monthly Budget ---");
+        Console.Write("Enter month (e.g., 2024-07): ");
+        string month = Console.ReadLine();
+
+        Console.Write("Enter budget amount: ");
+        decimal amount = decimal.Parse(Console.ReadLine());
+
+        MonthlyBudget budget = new MonthlyBudget(month, amount);
+        manager.AddMonthlyBudget(budget);
+    }
+
     // Display tithing details based on user input
     private static void DisplayTithingDetails()
     {
@@ -140,22 +162,42 @@ public class Program
         }
     }
 
-    // Initialize sample data for testing purposes
-    private static void InitializeSampleData()
+    // Save data to JSON file
+    private static void SaveData()
     {
-        // Create sample users
-        User user1 = new User(1, "John Doe", "john.doe@example.com");
-        manager.AddUser(user1);
+        Console.Write("Enter username to save data: ");
+        string username = Console.ReadLine();
+        manager.SaveData(username);
+        Console.WriteLine("Data saved successfully.");
+    }
 
-        // Create sample transactions
-        Income income1 = new Income(DateTime.Now, 1000, "Salary", "Monthly salary", "Company A");
-        Expense expense1 = new Expense(DateTime.Now, 200, "Groceries", "Weekly groceries", "Credit Card");
+    // Load data from JSON file
+    private static void LoadData()
+    {
+        Console.Write("Enter username to load data: ");
+        string username = Console.ReadLine();
+        manager.LoadData(username);
+        Console.WriteLine("Data loaded successfully.");
+    }
 
-        manager.AddTransaction(income1);
-        manager.AddTransaction(expense1);
+    // Method to handle invalid input gracefully
+    private static string ReadUserInput(string prompt)
+    {
+        Console.Write(prompt);
+        return Console.ReadLine();
+    }
 
-        // Create sample savings goals
-        SavingsGoal goal1 = new SavingsGoal("Vacation", 2000);
-        manager.AddSavingsGoal(goal1);
+    // Method to parse date input with validation
+    private static DateTime ReadDateInput(string prompt)
+    {
+        while (true)
+        {
+            Console.Write(prompt);
+            if (DateTime.TryParse(Console.ReadLine(), out DateTime date))
+            {
+                return date;
+            }
+            Console.WriteLine("Invalid input. Please enter a valid date in yyyy-mm-dd format.");
+        }
     }
 }

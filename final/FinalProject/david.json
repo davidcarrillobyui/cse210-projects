@@ -1,0 +1,24 @@
+{
+  "Transactions": [
+    {
+      "Date": "2024-07-20T00:00:00",
+      "Amount": 1500,
+      "Category": "Income",
+      "Description": "I worked a lot"
+    }
+  ],
+  "SavingsGoals": [
+    {
+      "GoalName": "PC gamer",
+      "GoalAmount": 1000,
+      "AmountSaved": 0
+    }
+  ],
+  "Users": [],
+  "MonthlyBudgets": [
+    {
+      "Month": "2024",
+      "BudgetAmount": 700
+    }
+  ]
+}
