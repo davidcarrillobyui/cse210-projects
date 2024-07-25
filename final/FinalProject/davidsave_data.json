@@ -1,0 +1,27 @@
+{
+  "Transactions": [
+    {
+      "Date": "2024-06-18T00:00:00",
+      "Amount": 1200,
+      "Category": "sales",
+      "Description": "sold ps5"
+    },
+    {
+      "Date": "2024-07-19T00:00:00",
+      "Amount": 50,
+      "Category": "food",
+      "Description": "groceries"
+    }
+  ],
+  "SavingsGoals": [
+    {
+      "GoalName": "PC gamer",
+      "GoalAmount": 1000,
+      "AmountSaved": 0
+    }
+  ],
+  "MonthlyBudgets": {
+    "800": 800
+  },
+  "Users": []
+}

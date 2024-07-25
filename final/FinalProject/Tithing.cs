@@ -1,7 +1,7 @@
 public class Tithing
 {
     // Property for IncomeAmount
-    public decimal IncomeAmount { get; set; }
+    public decimal IncomeAmount { get; private set; }
 
     // Constructor to initialize IncomeAmount
     public Tithing(decimal incomeAmount)

@@ -6,105 +6,113 @@ using System.Text.Json;
 public class PersonalFinanceManager
 {
     // List to store all transactions
-    private List<Transaction> transactions = new List<Transaction>();
+    private List<Transaction> _transactions = new List<Transaction>();
     
     // List to store all savings goals
-    private List<SavingsGoal> savingsGoals = new List<SavingsGoal>();
-    
-    // List to store all users
-    private List<User> users = new List<User>();
-    
-    // List to store all monthly budgets
-    private List<MonthlyBudget> monthlyBudgets = new List<MonthlyBudget>();
+    private List<SavingsGoal> _savingsGoals = new List<SavingsGoal>();
 
-    // Method to add a transaction (income or expense)
+    // Dictionary to store monthly budgets
+    private Dictionary<string, decimal> _monthlyBudgets = new Dictionary<string, decimal>();
+
+    // List to store users
+    private List<User> _users = new List<User>();
+
+    // Method to add a new transaction
     public void AddTransaction(Transaction transaction)
     {
-        transactions.Add(transaction);
+        _transactions.Add(transaction);
     }
 
-    // Method to add a savings goal
+    // Method to add a new savings goal
     public void AddSavingsGoal(SavingsGoal goal)
     {
-        savingsGoals.Add(goal);
+        _savingsGoals.Add(goal);
     }
 
-    // Method to add a monthly budget
+    // Method to add a new monthly budget
     public void AddMonthlyBudget(MonthlyBudget budget)
     {
-        monthlyBudgets.Add(budget);
+        _monthlyBudgets[budget.Month] = budget.Amount;
     }
 
     // Method to generate a financial report
     public Report GenerateReport()
     {
-        string reportContent = "Financial Report\n";
-        reportContent += "=================\n";
+        string content = "Financial Report\n\n";
 
-        decimal totalIncome = 0;
-        decimal totalExpense = 0;
-
-        foreach (var transaction in transactions)
+        content += "Transactions:\n";
+        foreach (var transaction in _transactions)
         {
-            if (transaction is Income income)
-            {
-                totalIncome += income.Amount;
-                reportContent += income.GetTransactionDetails() + "\n";
-            }
-            else if (transaction is Expense expense)
-            {
-                totalExpense += expense.Amount;
-                reportContent += expense.GetTransactionDetails() + "\n";
-            }
+            content += transaction.GetTransactionDetails() + "\n";
         }
 
-        reportContent += "\nSummary:\n";
-        reportContent += $"Total Income: {totalIncome}\n";
-        reportContent += $"Total Expense: {totalExpense}\n";
-        reportContent += $"Net Savings: {totalIncome - totalExpense}\n";
+        content += "\nSavings Goals:\n";
+        foreach (var goal in _savingsGoals)
+        {
+            content += goal.GetSavingsGoalDetails() + "\n";
+        }
 
-        return new Report(reportContent);
+        content += "\nMonthly Budgets:\n";
+        foreach (var budget in _monthlyBudgets)
+        {
+            content += $"Month: {budget.Key}, Amount: {budget.Value}\n";
+        }
+
+        return new Report(content);
     }
 
-    // Method to add a user
+    // Method to add a new user
     public void AddUser(User user)
     {
-        users.Add(user);
+        _users.Add(user);
     }
 
-    // Method to get the list of users
+    // Method to get a list of all users
     public List<User> GetUsers()
     {
-        return users;
+        return _users;
     }
 
-    // Save data to JSON file
+    // Method to save data to a JSON file
     public void SaveData(string username)
     {
         var data = new
         {
-            Transactions = transactions,
-            SavingsGoals = savingsGoals,
-            Users = users,
-            MonthlyBudgets = monthlyBudgets
+            Transactions = _transactions,
+            SavingsGoals = _savingsGoals,
+            MonthlyBudgets = _monthlyBudgets,
+            Users = _users
         };
 
-        string jsonData = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
-        File.WriteAllText($"{username}.json", jsonData);
+        string json = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText($"{username}_data.json", json);
     }
 
-    // Load data from JSON file
+    // Method to load data from a JSON file
     public void LoadData(string username)
     {
-        if (File.Exists($"{username}.json"))
+        if (File.Exists($"{username}_data.json"))
         {
-            string jsonData = File.ReadAllText($"{username}.json");
-            var data = JsonSerializer.Deserialize<dynamic>(jsonData);
+            string json = File.ReadAllText($"{username}_data.json");
+            var data = JsonSerializer.Deserialize<FinanceData>(json);
 
-            transactions = JsonSerializer.Deserialize<List<Transaction>>(data["Transactions"].ToString());
-            savingsGoals = JsonSerializer.Deserialize<List<SavingsGoal>>(data["SavingsGoals"].ToString());
-            users = JsonSerializer.Deserialize<List<User>>(data["Users"].ToString());
-            monthlyBudgets = JsonSerializer.Deserialize<List<MonthlyBudget>>(data["MonthlyBudgets"].ToString());
+            _transactions = data.Transactions;
+            _savingsGoals = data.SavingsGoals;
+            _monthlyBudgets = data.MonthlyBudgets;
+            _users = data.Users;
         }
+        else
+        {
+            Console.WriteLine("Data file not found.");
+        }
+    }
+
+    // Class to hold serialized data for JSON deserialization
+    private class FinanceData
+    {
+        public List<Transaction> Transactions { get; set; }
+        public List<SavingsGoal> SavingsGoals { get; set; }
+        public Dictionary<string, decimal> MonthlyBudgets { get; set; }
+        public List<User> Users { get; set; }
     }
 }

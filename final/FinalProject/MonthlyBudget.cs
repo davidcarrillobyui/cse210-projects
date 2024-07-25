@@ -1,19 +1,19 @@
 public class MonthlyBudget
 {
     // Properties for MonthlyBudget
-    public string Month { get; set; }
-    public decimal BudgetAmount { get; set; }
+    public string Month { get; private set; }
+    public decimal Amount { get; private set; }
 
     // Constructor to initialize MonthlyBudget properties
-    public MonthlyBudget(string month, decimal budgetAmount)
+    public MonthlyBudget(string month, decimal amount)
     {
         Month = month;
-        BudgetAmount = budgetAmount;
+        Amount = amount;
     }
 
-    // Method to get details of the monthly budget
-    public string GetMonthlyBudgetDetails()
+    // Method to get budget details
+    public string GetBudgetDetails()
     {
-        return $"Month: {Month}, Budget Amount: {BudgetAmount}";
+        return $"Month: {Month}, Budget Amount: {Amount}";
     }
 }

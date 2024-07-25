@@ -2,8 +2,8 @@ using System;
 
 public class Income : Transaction
 {
-    // Specific property for Income
-    public string IncomeSource { get; set; }
+    // Property specific to Income transactions
+    public string IncomeSource { get; private set; }
 
     // Constructor to initialize Income properties
     public Income(DateTime date, decimal amount, string category, string description, string incomeSource)
@@ -12,9 +12,15 @@ public class Income : Transaction
         IncomeSource = incomeSource;
     }
 
-    // Overriding the method to get details of an income transaction
+    // Override method to get income transaction details
     public override string GetTransactionDetails()
     {
-        return $"Income: {Amount} from {IncomeSource} on {Date.ToShortDateString()}";
+        return $"Income - Date: {Date}, Amount: {Amount}, Category: {Category}, Description: {Description}, Source: {IncomeSource}";
+    }
+
+    // Override method to get transaction type
+    public override string GetTransactionType()
+    {
+        return "Income";
     }
 }

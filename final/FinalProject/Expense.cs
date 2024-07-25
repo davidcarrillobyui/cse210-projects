@@ -2,8 +2,8 @@ using System;
 
 public class Expense : Transaction
 {
-    // Specific property for Expense
-    public string PaymentMethod { get; set; }
+    // Property specific to Expense transactions
+    public string PaymentMethod { get; private set; }
 
     // Constructor to initialize Expense properties
     public Expense(DateTime date, decimal amount, string category, string description, string paymentMethod)
@@ -12,9 +12,15 @@ public class Expense : Transaction
         PaymentMethod = paymentMethod;
     }
 
-    // Overriding the method to get details of an expense transaction
+    // Override method to get expense transaction details
     public override string GetTransactionDetails()
     {
-        return $"Expense: {Amount} for {Category} paid with {PaymentMethod} on {Date.ToShortDateString()}";
+        return $"Expense - Date: {Date}, Amount: {Amount}, Category: {Category}, Description: {Description}, Payment Method: {PaymentMethod}";
+    }
+
+    // Override method to get transaction type
+    public override string GetTransactionType()
+    {
+        return "Expense";
     }
 }

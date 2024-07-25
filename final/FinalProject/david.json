@@ -1,15 +1,21 @@
 {
   "Transactions": [
     {
-      "Date": "2024-07-20T00:00:00",
-      "Amount": 1500,
-      "Category": "Income",
-      "Description": "I worked a lot"
+      "Date": "2024-07-24T00:00:00",
+      "Amount": 500,
+      "Category": "sales",
+      "Description": "PC sale"
+    },
+    {
+      "Date": "2024-07-25T00:00:00",
+      "Amount": 50,
+      "Category": "food",
+      "Description": "groceries"
     }
   ],
   "SavingsGoals": [
     {
-      "GoalName": "PC gamer",
+      "GoalName": "New pc",
       "GoalAmount": 1000,
       "AmountSaved": 0
     }
@@ -17,8 +23,8 @@
   "Users": [],
   "MonthlyBudgets": [
     {
-      "Month": "2024",
-      "BudgetAmount": 700
+      "Month": "2024-07",
+      "BudgetAmount": 1200
     }
   ]
 }
